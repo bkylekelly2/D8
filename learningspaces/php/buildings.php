@@ -1,0 +1,47 @@
+<?php
+
+$buildings = array(
+  array('id' => '1','name' => 'Exploration Hall','address' => '20101 Academic Way, Ashburn, VA','campus_id' => '1','hideflag' => '0','created_at' => '2016-08-11 02:54:00','updated_at' => '2016-08-11 02:54:00'),
+  array('id' => '2','name' => 'Innovation Hall','address' => '45085 University Drive, Ashburn, VA','campus_id' => '1','hideflag' => '0','created_at' => '2016-08-11 02:54:00','updated_at' => '2016-08-11 02:54:00'),
+  array('id' => '3','name' => 'Enterprise Hall','address' => '44983 Knoll Square, Ashburn, VA','campus_id' => '1','hideflag' => '0','created_at' => '2016-08-11 02:54:00','updated_at' => '2016-08-11 02:54:00'),
+  array('id' => '4','name' => '1957 E St','address' => '1957 E Street NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:00','updated_at' => '2016-08-11 02:54:00'),
+  array('id' => '5','name' => 'Duques Hall','address' => '2201 G Street NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:01','updated_at' => '2016-08-11 02:54:01'),
+  array('id' => '6','name' => 'Gelman Library','address' => '2130 H Street NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:01','updated_at' => '2016-08-11 02:54:01'),
+  array('id' => '7','name' => 'Monroe Hall','address' => '2115 G Street NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:01','updated_at' => '2016-08-11 02:54:01'),
+  array('id' => '8','name' => 'Corcoran Hall','address' => '725 21st Street NW, Washington, DC','campus_id' => '2','hideflag' => '1','created_at' => '2016-08-11 02:54:01','updated_at' => '2017-01-18 16:23:41'),
+  array('id' => '9','name' => 'Hall of Government','address' => '710 21st Street NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:01','updated_at' => '2016-08-11 02:54:01'),
+  array('id' => '10','name' => 'Media and Public Affairs Building','address' => '805 21st Street NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:01','updated_at' => '2016-08-11 02:54:01'),
+  array('id' => '11','name' => 'Phillips Hall','address' => '801 22nd Street NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:01','updated_at' => '2016-08-11 02:54:01'),
+  array('id' => '12','name' => 'Rome Hall','address' => '801 22nd St NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:01','updated_at' => '2016-08-11 02:54:01'),
+  array('id' => '13','name' => 'Funger Hall','address' => '2201 G Street NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:01','updated_at' => '2016-08-11 02:54:01'),
+  array('id' => '14','name' => '2020 K St','address' => '2020 K Street NW, Washington, DC','campus_id' => '2','hideflag' => '1','created_at' => '2016-08-11 02:54:01','updated_at' => '2017-12-08 18:30:04'),
+  array('id' => '15','name' => 'Bell Hall','address' => '2029 G Street NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:02','updated_at' => '2016-08-11 02:54:02'),
+  array('id' => '16','name' => 'Old Main','address' => '1922 F Street NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:02','updated_at' => '2016-08-11 02:54:02'),
+  array('id' => '17','name' => 'Eckles Library','address' => '2100 Foxhall Road NW, Washington, DC','campus_id' => '3','hideflag' => '0','created_at' => '2016-08-11 02:54:02','updated_at' => '2016-08-11 02:54:02'),
+  array('id' => '18','name' => 'Acheson Science Center','address' => '2100 Foxhall Road NW, Washington, DC','campus_id' => '3','hideflag' => '0','created_at' => '2016-08-11 02:54:02','updated_at' => '2016-08-11 02:54:02'),
+  array('id' => '19','name' => 'Post Hall','address' => '','campus_id' => '3','hideflag' => '0','created_at' => '2016-08-11 02:54:02','updated_at' => '2016-08-11 02:54:02'),
+  array('id' => '20','name' => 'Milken Institute School of Public Health','address' => '950 New Hampshire Ave NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:03','updated_at' => '2016-08-11 02:54:03'),
+  array('id' => '21','name' => 'Discovery Hall','address' => '','campus_id' => '1','hideflag' => '0','created_at' => '2016-08-11 02:54:03','updated_at' => '2016-08-11 02:54:03'),
+  array('id' => '22','name' => 'Tompkins Hall','address' => '725 23rd Street NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:03','updated_at' => '2016-08-11 02:54:03'),
+  array('id' => '23','name' => 'Smith Hall','address' => '801 22nd Street NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:03','updated_at' => '2016-08-19 16:25:33'),
+  array('id' => '24','name' => '2108 G Street','address' => '2108 G Street NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:03','updated_at' => '2016-08-11 02:54:03'),
+  array('id' => '25','name' => '2110 G Street','address' => '2110 G Street NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:03','updated_at' => '2016-08-11 02:54:03'),
+  array('id' => '26','name' => '2147 F St NW','address' => '2147 F Street NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:03','updated_at' => '2016-08-11 02:54:03'),
+  array('id' => '27','name' => 'Academic Building','address' => '2100 Foxhall Road NW, Washington, DC','campus_id' => '3','hideflag' => '0','created_at' => '2016-08-11 02:54:03','updated_at' => '2016-08-11 02:54:03'),
+  array('id' => '28','name' => '2142 G St','address' => '2142 G Street NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:04','updated_at' => '2016-08-11 02:54:04'),
+  array('id' => '29','name' => '1310 G St','address' => '1310 G Street NW, Washington DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:04','updated_at' => '2016-08-11 02:54:04'),
+  array('id' => '30','name' => 'Building TT','address' => '600 21st Street NW, Washington DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:04','updated_at' => '2016-08-11 02:54:04'),
+  array('id' => '31','name' => '837 22nd Street','address' => '837 22nd Street NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:04','updated_at' => '2016-08-11 02:54:04'),
+  array('id' => '32','name' => 'Ames Hall','address' => '2100 Foxhall Road NW, Washington, DC','campus_id' => '3','hideflag' => '0','created_at' => '2016-08-11 02:54:04','updated_at' => '2016-08-11 02:54:04'),
+  array('id' => '33','name' => 'Hand Chapel','address' => '2100 Foxhall Road NW, Washington, DC','campus_id' => '3','hideflag' => '0','created_at' => '2016-08-11 02:54:04','updated_at' => '2016-08-11 02:54:04'),
+  array('id' => '34','name' => 'Lloyd Gym','address' => '2100 Foxhall Road NW, Washington, DC','campus_id' => '3','hideflag' => '0','created_at' => '2016-08-11 02:54:04','updated_at' => '2016-08-11 02:54:04'),
+  array('id' => '35','name' => 'Science and Engineering Hall','address' => '800 22nd St NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2016-08-11 02:54:04','updated_at' => '2016-08-11 02:54:04'),
+  array('id' => '36','name' => '1776 G St','address' => '1776 G Street NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2017-08-17 18:55:23','updated_at' => '2017-08-17 18:55:23'),
+  array('id' => '37','name' => 'Lerner Health and Wellenss Center','address' => '','campus_id' => '2','hideflag' => '0','created_at' => '2017-08-17 18:55:23','updated_at' => '2017-08-17 18:55:23'),
+  array('id' => '36','name' => 'Marvin Center','address' => '1776 G Street NW, Washington, DC','campus_id' => '2','hideflag' => '0','created_at' => '2017-08-17 18:55:23','updated_at' => '2017-08-17 18:55:23'),
+  array('id' => '36','name' => 'Shenkman Hall','address' => '','campus_id' => '2','hideflag' => '0','created_at' => '2017-08-17 18:55:23','updated_at' => '2017-08-17 18:55:23'),
+  array('id' => '36','name' => 'District House','address' => '','campus_id' => '2','hideflag' => '0','created_at' => '2017-08-17 18:55:23','updated_at' => '2017-08-17 18:55:23')
+);
+
+
+?>

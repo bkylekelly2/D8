@@ -1,0 +1,22 @@
+/* */
+.contextual {
+  display: none!important;
+}
+
+#library_hours{
+	position:absolute;
+	top:2px;
+	right:100px;
+}
+
+
+#emergency_alert-content{
+	width:100%;
+}
+
+
+.events-image img{
+	max-height:100px;
+	max-width:100px;
+	float:left;
+}

@@ -1,0 +1,146 @@
+@import url("jquery-ui.min.css");
+@import url("gweverything.css"); // I don't think this is a good solution :-(
+@import url("nice_menus.css");
+@import url("gwu-proto-nice-menu.css");
+
+// ========== Global Mixins & Variables
+@import "utilities";
+
+
+/* =========== GW General Stuff ============ */
+
+body {
+  color: #444;
+}
+
+a {
+  color: $gwlightblue;
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  text-decoration: underline;
+  color: #a75523;
+}
+
+.element-invisible {
+  @include hidden-visually;
+}
+
+.element-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+}
+
+/* =========== GW Page Layout =========== */
+
+#skip-link {
+
+  margin: 0;
+  z-index: 3;
+  position: relative;
+
+  a {
+    display: block;
+    width: 100%;
+    padding: 2px 0 3px 0;
+    text-align: center;
+    background-color: #666;
+    color: #fff;
+  }
+}
+
+.mainWrapper, #header-wrapper, .utility-links-menu, #footer-wrapper, #nav-bar-wrapper, #breadcrumbWrapper, .region-bottom, .homepage-promotion-wrapper, #user-login, .page-node-1 article, .page-node-2 article, article.node-photo-gallery, ul.tabs-primary, ul.tabs-secondary, div.profile {
+
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include mediaMin(1100px) {
+    max-width: 1100px;
+  }
+
+}
+
+#header-wrapper, #footer-wrapper, #nav-bar-wrapper {
+  padding: 0 0.58em;
+}
+
+.container-fluid, .container-fluid, .row {
+  padding: 0;
+  margin: 0;
+}
+
+/* =========== GW Header =========== */
+
+$headerHeight: 132;
+$headerImgHeight: 90;
+
+#header #header-wrapper, #header #header-wrapper .gwlogo {
+
+  display: none;
+
+  img {
+    width: auto;
+  }
+
+  @include mediaMin(600px) {
+    display: block;
+    position: relative;
+    height: #{$headerHeight * .5}px;
+    img {
+      height: #{$headerImgHeight * .5}px;
+    }
+  }
+  @include mediaMin(750px) {
+    height: #{$headerHeight * .75}px;
+    img {
+      height: #{$headerImgHeight * .75}px;
+    }
+  }
+  @include mediaMin(900px) {
+    height: #{$headerHeight}px;
+    img {
+      height: #{$headerImgHeight}px;
+    }
+  }
+
+  & > a {
+    display: inline-block;
+    line-height: 1%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  #division-of, #initiative-of {
+
+    display: none;
+
+    @include mediaMin(900px) {
+      display: block;
+      position: absolute;
+      left: 125px;
+      bottom: 1em;
+      white-space: nowrap;
+    }
+
+  }
+  #initiative-of {
+    @include mediaMin(900px) {
+      left: 130px;
+    }
+  }
+
+}
+
+/* =========== GW Nav Bar =========== */
+
+.mean-nav ul.nice-menu li::before {
+  display: none;
+}
+
+#navigation-mobile, #nav-bar.sticky {
+  position: fixed;
+}

@@ -1,0 +1,137 @@
+@import url("jquery-ui.min.css");
+@import url("gweverything.css");
+@import url("nice_menus.css");
+@import url("gwu-proto-nice-menu.css");
+/* =========== GW General Stuff ============ */
+body {
+  color: #444;
+}
+
+a {
+  color: #0073aa;
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  text-decoration: underline;
+  color: #a75523;
+}
+
+.element-invisible {
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  position: absolute;
+  left: -10000px;
+  top: auto;
+}
+
+.element-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+}
+
+/* =========== GW Page Layout =========== */
+#skip-link {
+  margin: 0;
+  z-index: 3;
+  position: relative;
+}
+#skip-link a {
+  display: block;
+  width: 100%;
+  padding: 2px 0 3px 0;
+  text-align: center;
+  background-color: #666;
+  color: #fff;
+}
+
+.mainWrapper, #header-wrapper, .utility-links-menu, #footer-wrapper, #nav-bar-wrapper, #breadcrumbWrapper, .region-bottom, .homepage-promotion-wrapper, #user-login, .page-node-1 article, .page-node-2 article, article.node-photo-gallery, ul.tabs-primary, ul.tabs-secondary, div.profile {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media screen and (min-width: 1100px) {
+  .mainWrapper, #header-wrapper, .utility-links-menu, #footer-wrapper, #nav-bar-wrapper, #breadcrumbWrapper, .region-bottom, .homepage-promotion-wrapper, #user-login, .page-node-1 article, .page-node-2 article, article.node-photo-gallery, ul.tabs-primary, ul.tabs-secondary, div.profile {
+    max-width: 1100px;
+  }
+}
+
+#header-wrapper, #footer-wrapper, #nav-bar-wrapper {
+  padding: 0 0.58em;
+}
+
+.container-fluid, .container-fluid, .row {
+  padding: 0;
+  margin: 0;
+}
+
+/* =========== GW Header =========== */
+#header #header-wrapper, #header #header-wrapper .gwlogo {
+  display: none;
+}
+#header #header-wrapper img, #header #header-wrapper .gwlogo img {
+  width: auto;
+}
+@media screen and (min-width: 600px) {
+  #header #header-wrapper, #header #header-wrapper .gwlogo {
+    display: block;
+    position: relative;
+    height: 66px;
+  }
+  #header #header-wrapper img, #header #header-wrapper .gwlogo img {
+    height: 45px;
+  }
+}
+@media screen and (min-width: 750px) {
+  #header #header-wrapper, #header #header-wrapper .gwlogo {
+    height: 99px;
+  }
+  #header #header-wrapper img, #header #header-wrapper .gwlogo img {
+    height: 67.5px;
+  }
+}
+@media screen and (min-width: 900px) {
+  #header #header-wrapper, #header #header-wrapper .gwlogo {
+    height: 132px;
+  }
+  #header #header-wrapper img, #header #header-wrapper .gwlogo img {
+    height: 90px;
+  }
+}
+#header #header-wrapper > a, #header #header-wrapper .gwlogo > a {
+  display: inline-block;
+  line-height: 1%;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+#header #header-wrapper #division-of, #header #header-wrapper #initiative-of, #header #header-wrapper .gwlogo #division-of, #header #header-wrapper .gwlogo #initiative-of {
+  display: none;
+}
+@media screen and (min-width: 900px) {
+  #header #header-wrapper #division-of, #header #header-wrapper #initiative-of, #header #header-wrapper .gwlogo #division-of, #header #header-wrapper .gwlogo #initiative-of {
+    display: block;
+    position: absolute;
+    left: 125px;
+    bottom: 1em;
+    white-space: nowrap;
+  }
+}
+@media screen and (min-width: 900px) {
+  #header #header-wrapper #initiative-of, #header #header-wrapper .gwlogo #initiative-of {
+    left: 130px;
+  }
+}
+
+/* =========== GW Nav Bar =========== */
+.mean-nav ul.nice-menu li::before {
+  display: none;
+}
+
+#navigation-mobile, #nav-bar.sticky {
+  position: fixed;
+}
+
+/*# sourceMappingURL=gwstyles.css.map */

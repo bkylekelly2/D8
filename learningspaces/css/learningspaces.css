@@ -1,0 +1,854 @@
+/* =========== ?? ============ */
+.highlighted {
+  background-color: aliceblue;
+}
+
+.Class_filter {
+  border: 1px solid #e5e5e5;
+  background-color: #ededed;
+}
+
+.infoWindow {
+  border: 1px solid #fff;
+  background-color: #000;
+}
+
+.showModal {
+  cursor: pointer;
+}
+
+/* ========== Page layout ========= */
+#spaces-listing h1, #spaces-filters h2, #spaces-map h2 {
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  position: absolute;
+  left: -10000px;
+  top: auto;
+}
+
+#spaces-listing, #spaces-filters, #spaces-map {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+#main-content {
+  /* By default only show the list of "results". Filters and map get hidden behind other "tabs" */
+  /* If the screen is wider than 600px, show the map next to the list of results */
+  /* Small adjustment at 750px so that the map isn't taking up too much space (as if the map had a min-width before, and now the min-width is getting transferred to the result list) */
+  /* At 900px wide, show the filters in addition to the list and map. Make each 1/3 wide. */
+  /* Small adjustment at 1000px as a sort of min-width on the result list */
+  /* At 1300px is where the filters go two-column, but still want a sort of min-width on result list */
+  /* Back to 1/3 for each column on the assumption there's now enough room for everything */
+}
+#main-content #spaces-filters, #main-content #spaces-map {
+  display: none;
+}
+#main-content #map, #main-content #map-wrapper {
+  width: 100%;
+  height: 100%;
+}
+#main-content #spaces-map #map-wrapper {
+  position: fixed;
+  right: 0;
+  z-index: 2;
+}
+#main-content #spaces-listing {
+  padding: 10px;
+}
+@media screen and (min-width: 600px) {
+  #main-content #spaces-listing, #main-content #spaces-filters, #main-content #spaces-map {
+    padding: 20px 0 0 20px;
+  }
+  #main-content #spaces-map {
+    padding-top: 0;
+    display: block;
+    width: 45%;
+  }
+  #main-content #spaces-listing {
+    width: 55%;
+  }
+}
+@media screen and (min-width: 750px) {
+  #main-content #spaces-map {
+    width: 40%;
+  }
+  #main-content #spaces-listing {
+    width: 60%;
+  }
+}
+@media screen and (min-width: 900px) {
+  #main-content #spaces-listing, #main-content #spaces-filters, #main-content #spaces-map {
+    width: 33.33333333%;
+  }
+  #main-content #spaces-listing {
+    margin-left: 33.33333333%;
+    margin-right: -66.66666666%;
+  }
+  #main-content #spaces-filters {
+    display: block;
+    margin-right: -33.33333333%;
+  }
+  #main-content #spaces-map {
+    margin-left: 66.66666666%;
+    margin-right: -100%;
+  }
+}
+@media screen and (min-width: 1000px) {
+  #main-content #spaces-filters, #main-content #spaces-map {
+    width: 30%;
+  }
+  #main-content #spaces-listing {
+    width: 40%;
+    margin-left: 30%;
+    margin-right: -70%;
+  }
+  #main-content #spaces-filters {
+    margin-right: -30%;
+  }
+  #main-content #spaces-map {
+    margin-left: 70%;
+  }
+}
+@media screen and (min-width: 1300px) {
+  #main-content #spaces-filters {
+    width: 33%;
+    margin-right: -33%;
+  }
+  #main-content #spaces-listing {
+    width: 40%;
+    margin-left: 33%;
+    margin-right: -73%;
+  }
+  #main-content #spaces-map {
+    width: 27%;
+    margin-left: 73%;
+  }
+}
+@media screen and (min-width: 1400px) {
+  #main-content #spaces-listing, #main-content #spaces-filters, #main-content #spaces-map {
+    width: 33.33333333%;
+  }
+  #main-content #spaces-listing {
+    margin-left: 33.33333333%;
+    margin-right: -66.66666666%;
+  }
+  #main-content #spaces-filters {
+    display: block;
+    margin-right: -33.33333333%;
+  }
+  #main-content #spaces-map {
+    margin-left: 66.66666666%;
+    margin-right: -100%;
+  }
+}
+
+/* ========== Space/room teasers ========== */
+#rooms {
+  min-height: 50vh;
+  transition: all .2s;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+#rooms.processing-results:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 2;
+}
+#rooms.processing-results:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(0, 115, 170, 0.4) 45%, rgba(0, 115, 170, 0.6) 50%, rgba(255, 255, 255, 0) 51%);
+  animation: loadingRooms 1.5s infinite;
+  z-index: 3;
+}
+
+@keyframes loadingRooms {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+.roomTeaser {
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  transition: all .2s;
+  cursor: pointer;
+  min-height: 150px;
+}
+.roomTeaser:hover, .roomTeaser:focus {
+  transition: all .2s;
+  background-color: rgba(0, 115, 170, 0.1);
+}
+.roomTeaser .teaserImage {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  height: 150px;
+  min-height: 150px;
+  max-height: 150px;
+}
+@media screen and (min-width: 475px) {
+  .roomTeaser {
+    flex-direction: row;
+  }
+  .roomTeaser .teaserImage {
+    width: 225px;
+    min-width: 225px;
+    max-width: 225px;
+    height: inherit;
+    max-height: inherit;
+    min-height: inherit;
+  }
+}
+@media screen and (min-width: 600px) {
+  .roomTeaser {
+    flex-direction: column;
+  }
+  .roomTeaser .teaserImage {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    height: 150px;
+    min-height: 150px;
+    max-height: 150px;
+  }
+}
+@media screen and (min-width: 750px) {
+  .roomTeaser {
+    flex-direction: row;
+  }
+  .roomTeaser .teaserImage {
+    width: 225px;
+    min-width: 225px;
+    max-width: 225px;
+    height: inherit;
+    max-height: inherit;
+    min-height: inherit;
+  }
+}
+@media screen and (min-width: 900px) {
+  .roomTeaser {
+    flex-direction: column;
+  }
+  .roomTeaser .teaserImage {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    height: 150px;
+    min-height: 150px;
+    max-height: 150px;
+  }
+}
+@media screen and (min-width: 1050px) {
+  .roomTeaser {
+    flex-direction: row;
+  }
+  .roomTeaser .teaserImage {
+    width: 225px;
+    min-width: 225px;
+    max-width: 225px;
+    height: inherit;
+    max-height: inherit;
+    min-height: inherit;
+  }
+}
+.roomTeaser .teaserImage {
+  flex: 1;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  position: relative;
+  overflow: hidden;
+  /* so that the focus outline doesn't stretch way out to the side due to the "hidden" image and position:relative */
+}
+.roomTeaser .teaserImage img {
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  position: absolute;
+  left: -10000px;
+  top: auto;
+}
+.roomTeaser:hover .teaserImage:after, .roomTeaser:focus .teaserImage:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(rgba(0, 64, 101, 0.2), rgba(0, 64, 101, 0.7));
+}
+.roomTeaser .teaserContents {
+  flex: 1;
+  padding: .5em .75em;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.roomTeaser .teaserContents .teaserTitle {
+  margin-bottom: 1em;
+}
+.roomTeaser .teaserContents .teaserTitle h2 {
+  font-size: 1.15em;
+  font-family: "AvenirLTStd-Roman",Helvetica,Arial,sans-serif;
+  margin: 0 0 .15em;
+}
+.roomTeaser .teaserContents .teaserTitle h2 .teaserRoom {
+  font-size: 1.25em;
+  color: #0073aa;
+  display: block;
+  margin: .2em 0 .5em;
+}
+.roomTeaser .teaserContents .teaserTitle .teaserTitleDetails {
+  color: #777;
+  text-transform: uppercase;
+  font-size: .825em;
+}
+.roomTeaser .teaserContents .teaserDetails {
+  text-align: right;
+}
+.roomTeaser .teaserContents .teaserDetails > div {
+  clear: right;
+}
+.roomTeaser .teaserContents .teaserDetails .teaserSpaceType {
+  display: inline-block;
+}
+.roomTeaser .teaserContents .teaserDetails .teaserSpaceType:after {
+  content: " |";
+}
+.roomTeaser .teaserContents .teaserDetails .teaserReservable {
+  display: inline-block;
+  float: right;
+  padding-left: calc(20px + .3em);
+  background-repeat: no-repeat;
+  background-image: url(../images/calendar-icon.svg);
+  background-size: 16px 16px;
+  background-position: .3em 3px;
+}
+.roomTeaser .teaserContents .teaserDetails .teaserSeating {
+  display: inline-block;
+  padding-left: calc(20px + .3em);
+  background-repeat: no-repeat;
+  background-image: url(../images/chair-icon.svg);
+  background-size: 16px 16px;
+  background-position: .3em 3px;
+}
+
+#noRoom {
+  font-style: italic;
+}
+
+#results_count {
+  margin-bottom: 1em;
+}
+
+#load {
+  margin: 1em auto;
+  display: table;
+}
+
+/* ========== Room/space full information =========== */
+#room h2 {
+  margin-top: 0;
+}
+#room .fullContent p:first-of-type {
+  margin-top: .75em;
+}
+#room .fullContent > div {
+  margin: 1em 0;
+  padding-left: 1em;
+}
+#room .fullContent > div .information-label {
+  margin-left: -1em;
+}
+#room .fullContent > div .information-contents {
+  display: inline;
+}
+@media screen and (min-width: 800px) {
+  #room .fullContent > div {
+    display: table-row;
+    width: 100%;
+    padding-left: 10.25em;
+    box-sizing: border-box;
+  }
+  #room .fullContent > div .information-label {
+    display: table-cell;
+    width: 10em;
+    padding-left: -10.25em;
+    vertical-align: top;
+    padding-bottom: 1em;
+  }
+  #room .fullContent > div .information-contents {
+    display: block;
+    padding-bottom: 1em;
+    /* Hours and interior location description have HTML */
+  }
+  #room .fullContent > div .information-contents > p {
+    margin: .5em 0;
+  }
+  #room .fullContent > div .information-contents > p:first-of-type {
+    margin: 0;
+  }
+  #room .fullContent > div .information-contents > p:last-child {
+    margin-bottom: 0;
+  }
+}
+#room .fullContent .reservation-information .reg-button {
+  vertical-align: -.25em;
+}
+#room .fullContent .reservation-information .reg-button a {
+  padding: .5em;
+}
+#room .fullContent .report-problem, #room .fullContent .single-space-map-link {
+  text-align: right;
+}
+@media screen and (min-width: 800px) {
+  #room .fullContent .report-problem, #room .fullContent .single-space-map-link {
+    float: right;
+    margin-left: 2em;
+    margin-top: 0;
+  }
+}
+#room .fullContent .seating-icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  opacity: .75;
+}
+#room .fullContent .filter-icon {
+  width: 20px;
+  height: 20px;
+  opacity: .75;
+}
+#room .fullContent #single-space-map {
+  display: block;
+  height: 250px;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+/* Carousel overrides */
+.slick {
+  margin: 1em -10px;
+}
+.slick .slick-prev, .slick .slick-next {
+  width: 30px;
+  height: 30px;
+}
+.slick .slick-prev:before, .slick .slick-next:before {
+  font-size: 30px;
+  color: #0073aa;
+  text-shadow: 2px 0 2px #fff, -2px 0 2px #fff, 0 2px 2px #fff, 0 -2px 2px #fff, 1px 1px 2px #fff, -1px -1px 2px #fff, 1px -1px 2px #fff, -1px 1px 2px #fff;
+}
+.slick .slick-prev.slick-disabled:before, .slick .slick-next.slick-disabled:before {
+  text-shadow: none;
+  color: #fff;
+}
+@media screen and (min-width: 400px) {
+  .slick .slick-prev, .slick .slick-next {
+    width: 50px;
+    height: 50px;
+  }
+  .slick .slick-prev:before, .slick .slick-next:before {
+    font-size: 50px;
+  }
+}
+.slick .slick-prev {
+  left: 20px;
+  z-index: 2;
+}
+.slick .slick-next {
+  right: 20px;
+}
+.slick .slick-slide {
+  margin: 0 10px;
+  box-sizing: border-box;
+}
+.slick.clickable-images .slick-slide, .slick.clickable-images .slick-slide a {
+  cursor: pointer;
+}
+.slick.unseen-images .slick-slide, .slick.unseen-images .slick-slide a {
+  cursor: grab;
+}
+.slick.unseen-images .slick-slide:active, .slick.unseen-images .slick-slide a:active {
+  cursor: grabbing;
+}
+.slick .off-screen {
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  position: absolute;
+  left: -10000px;
+  top: auto;
+}
+
+.slick-lightbox .slick-prev, .slick-lightbox .slick-next, .slick-lightbox .slick-lightbox-close {
+  width: 30px;
+  height: 30px;
+  z-index: 2;
+}
+.slick-lightbox .slick-prev:before, .slick-lightbox .slick-next:before, .slick-lightbox .slick-lightbox-close:before {
+  font-size: 30px;
+}
+@media screen and (min-width: 400px) {
+  .slick-lightbox .slick-prev, .slick-lightbox .slick-next, .slick-lightbox .slick-lightbox-close {
+    width: 50px;
+    height: 50px;
+  }
+  .slick-lightbox .slick-prev:before, .slick-lightbox .slick-next:before, .slick-lightbox .slick-lightbox-close:before {
+    font-size: 50px;
+  }
+}
+
+/* ========== infoWindows on Google Map ========== */
+.infoWindowRooms h3 {
+  font-size: 1.2em;
+  margin: .25em 0 .5em;
+  max-width: 175px;
+}
+@media screen and (min-width: 1200px) {
+  .infoWindowRooms {
+    max-width: 225px;
+  }
+}
+.infoWindowRooms .infoWindowRoomsList {
+  overflow-y: auto;
+  max-height: 175px;
+  width: 175px;
+}
+@media screen and (min-width: 1200px) {
+  .infoWindowRooms .infoWindowRoomsList {
+    width: 225px;
+  }
+}
+.infoWindowRooms .infoWindowRoomsList .infoWindowRoom {
+  padding: .75em .25em;
+  margin-right: 1em;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 1em;
+}
+.infoWindowRooms .infoWindowRoomsList .infoWindowRoom:not(:first-child) {
+  border-top: 1px solid #ccc;
+}
+.infoWindowRooms .infoWindowRoomsList .infoWindowRoom:hover {
+  background-color: rgba(0, 115, 170, 0.1);
+}
+
+/* ========== "Trigger" buttons / tabs that show different sections on smaller screens =========== */
+#triggers {
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  padding: 16px 16px 0;
+  border-bottom: 1px solid #bbb;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+  left: 0;
+}
+@media screen and (min-width: 600px) {
+  #triggers {
+    padding-top: 0;
+    position: relative;
+    left: auto;
+    z-index: 0;
+    top: auto;
+    margin-bottom: 20px;
+  }
+  #triggers #map-trigger {
+    display: none;
+  }
+}
+#triggers li {
+  margin: 0;
+  padding: 1em .25em;
+  list-style-type: none;
+  cursor: pointer;
+  color: #0073aa;
+  white-space: nowrap;
+  text-align: center;
+  border: 1px solid #bbb;
+  border-width: 1px 1px 0 0;
+  background-color: #eee;
+  width: 33.3333333%;
+}
+#triggers li:first-child {
+  border-left-width: 1px;
+}
+@media screen and (min-width: 600px) {
+  #triggers li {
+    width: auto;
+    padding: 1em 2em;
+  }
+}
+#triggers li.selected {
+  background-color: #fff;
+  border-bottom: 1px solid #fff;
+  margin-bottom: -1px;
+}
+#triggers li .fa {
+  font-size: 1.5em;
+  vertical-align: middle;
+}
+@media screen and (min-width: 900px) {
+  #triggers {
+    display: none;
+  }
+}
+
+/* ========== jQuery UI dialog overrides ========== */
+.ui-widget-overlay {
+  background-color: #000;
+  opacity: .7;
+  filter: Alpha(Opacity=70);
+}
+
+.ui-widget {
+  font-family: inherit;
+}
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+  font-family: inherit;
+}
+
+.ui-dialog {
+  max-width: 1100px;
+}
+
+[aria-describedby=room] .ui-dialog-title {
+  color: #004065;
+  font-size: 1.75em;
+}
+
+/* ========== Filter boxes ========== */
+#spaces-filters .filter_division {
+  margin-bottom: .5em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+#spaces-filters .filter_division .filter-toggle {
+  float: right;
+  margin: 0 .5em 0 1em;
+}
+#spaces-filters .filter_division h3 {
+  font-size: 1em;
+  font-weight: bold;
+  background-color: rgba(0, 64, 101, 0.05);
+  padding: .5em;
+  border-bottom: 1px dotted #ccc;
+  margin: 0;
+  cursor: pointer;
+}
+#spaces-filters .filter_division > div {
+  padding: .7em .7em 0;
+}
+#spaces-filters .filter_division.collapsed > div {
+  display: none;
+}
+#spaces-filters .filter_division ul, #spaces-filters .filter_division li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  width: 100%;
+}
+#spaces-filters .filter_division ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+#spaces-filters .filter_division li {
+  margin: 0 0 .7em;
+}
+@media screen and (min-width: 1300px) {
+  #spaces-filters .filter_division li {
+    width: auto;
+    min-width: 50%;
+  }
+}
+@media screen and (min-width: 500px) {
+  .ui-dialog #spaces-filters .filter_division li {
+    width: auto;
+    min-width: 50%;
+  }
+}
+#spaces-filters #building.filter_division li {
+  min-width: 100%;
+}
+#spaces-filters .filter_division label {
+  margin: 0;
+  font-weight: normal;
+  color: #0073aa;
+}
+
+#campus {
+  margin: .5em 0 1em;
+}
+#campus h2 {
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  position: absolute;
+  left: -10000px;
+  top: auto;
+}
+#campus ul, #campus li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+#campus li {
+  margin-right: .5em;
+  margin-bottom: .25em;
+}
+#campus li label {
+  margin: 0;
+  font-weight: normal;
+  color: #0073aa;
+}
+
+/* Just because it looks so thick by default and we don't have FontAwesome Pro */
+.fa-external-link-alt {
+  opacity: .8;
+}
+
+/* =========== Sliders/switches to replace checkboxes =========== */
+.filter_division {
+  /* :not(:hover) here to avoid the weirdness of getting the outline when clicking instead of tabbing (though realizing it will be there as soon as hovered away from) */
+}
+.filter_division li {
+  padding-left: calc(30px + .5em);
+}
+.filter_division input {
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  position: absolute;
+  left: -10000px;
+  top: auto;
+}
+.filter_division label {
+  position: relative;
+  cursor: pointer;
+  display: inline;
+  margin-left: calc(-30px - .5em);
+  padding-left: calc(30px + .5em);
+  padding-right: .5em;
+}
+#campus.filter_division label, .intersection.filter_division label {
+  padding-left: calc(20px + .5em);
+}
+.filter_division label:before {
+  content: "";
+  display: inline-block;
+  height: 20px;
+  width: 30px;
+  background-color: #ccc;
+  border-radius: 10px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: all .2s;
+}
+.intersection.filter_division label:before {
+  border-radius: 0;
+  width: 20px;
+}
+#campus.filter_division label:before {
+  width: 20px;
+}
+.filter_division label:after {
+  content: "";
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: all .2s;
+}
+.intersection.filter_division label:after {
+  border-radius: 0;
+}
+.filter_division label img {
+  opacity: .5;
+  width: 20px;
+  height: 20px;
+}
+.filter_division input:checked + label:before {
+  background-color: #0073aa;
+  transition: all .2s;
+}
+.filter_division input:checked + label:after {
+  left: 12px;
+  transition: all .2s;
+}
+#campus.filter_division input:checked + label:after {
+  left: 2px;
+  box-shadow: inset 0 0 0 4px #fff;
+  background-color: #0073aa;
+}
+.intersection.filter_division input:checked + label:after {
+  left: 6px;
+  border: 0 solid #fff;
+  border-width: 0 3px 3px 0;
+  width: 8px;
+  height: 12px;
+  transform: rotate(45deg);
+  background-color: transparent;
+}
+.filter_division input:focus + label:not(:hover) {
+  outline: 1px dotted;
+}
+.filter_division .filter-explanation {
+  padding-left: 0;
+  margin-bottom: .75em;
+  min-width: 100%;
+}
+.filter_division .filter-explanation .filter-explanation-tooltip-trigger {
+  margin-left: .5em;
+  color: #0073aa;
+  cursor: pointer;
+  position: relative;
+}
+.filter_division .filter-explanation .filter-explanation-tooltip-trigger:hover:before, .filter_division .filter-explanation .filter-explanation-tooltip-trigger:focus:before {
+  content: attr(title);
+  background-color: #fff;
+  color: #333;
+  width: 200px;
+  position: absolute;
+  z-index: 103;
+  bottom: calc(100% + .5em);
+  right: -100px;
+  padding: .75em;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 5px #ccc;
+}
+.ui-dialog .filter_division .filter-explanation .filter-explanation-tooltip-trigger:hover:before, .ui-dialog .filter_division .filter-explanation .filter-explanation-tooltip-trigger:focus:before {
+  right: 0;
+}
+
+/*# sourceMappingURL=learningspaces.css.map */

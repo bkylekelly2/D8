@@ -1,0 +1,115 @@
+.highlighted{
+	background-color:aliceblue;
+}
+
+.Class_filter{
+	border: 1px solid #e5e5e5;
+	background-color:#ededed;
+}
+.infoWindow{
+	border: 1px solid #fff;
+	background-color:#000;	
+}
+
+.showModal{
+	cursor: pointer;
+}
+
+/* Filter boxes */
+
+.filter_division {
+  margin-bottom: .5em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.filter_division h3 {
+  font-size: 1em;
+  font-weight: bold;
+  background-color: rgba(0,64,101,.05);
+  padding: .25em .5em;
+  border-bottom: 1px dotted #ccc;
+  margin: 0;
+}
+
+.filter_division > div {
+  padding: .5em;
+}
+
+.filter_division ul, .filter_division li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.filter_division li:not(:last-child) {
+  margin: 0 0 .25em;
+}
+
+.filter_division label {
+  margin: 0;
+}
+
+/* Sliders to replace checkboxes */
+
+
+.filter_division label {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+}
+.filter_division label span:before {
+  content: "";
+  display: inline-block;
+  height: 20px;
+  width: 30px;
+  background-color: #ccc;
+  border-radius: 10px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: all .2s;
+}
+#campus.filter_division label span:before {
+  width: 20px;
+}
+.filter_division label input {
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  position: absolute;
+  left: -10000px;
+  top: auto;
+}
+.filter_division label span {
+  padding-left: 38px;
+  padding-right: .5em;
+}
+#campus.filter_division label span {
+  padding-left: 28px;
+}
+.filter_division label span:after {
+  content: "";
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: all .2s;
+}
+.filter_division label :checked + span:before {
+  background-color: #0073aa;
+  transition: all .2s;
+}
+.filter_division label :checked + span:after {
+  left: 12px;
+  transition: all .2s;
+}
+#campus.filter_division label :checked + span:after {
+  left: 2px;
+  box-shadow: inset 0 0 0 4px #fff;
+  background-color: #0073aa;
+}
