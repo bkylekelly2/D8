@@ -1,0 +1,7 @@
+nhttac_consultant_applications_block.description:
+  path: '/nhttac/applications'
+  defaults:
+    _controller: '\Drupal\nhttac_consultant_applications_block\Controller\NHTTACController::getApplications'
+    _title: 'NHTTAC Javascript'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,7 @@
+library1:
+  version: 1.x
+  js:
+    js/scripts.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
