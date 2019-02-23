@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * @file
+ * Module file for nhttac_consultant_type_list.
+ */
+
+use Drupal\Core\Block\BlockPluginInterface;
+
+/**
+ * @defgroup nhttac_consultant_type_list  NHTTAC Consultant Type List: Block
+ * @ingroup nhttac
+ * @{
+ */
+
+/**
+ * Implements hook_block_view_alter().
+ *
+ * This hook allows you to modify the output of any block in the system.
+ *
+ * We are going to change the block label to uppercase if it contains the string
+ * "uppercase" or if the default block label contains this string. The default
+ * block label is set programmatically in the subject key of the block's plugin
+ * definition. The configurable block label, which can be overridden through the
+ * UI, is found in the "#configuration" key of the block's build definition.
+ * This module creates a block that demonstrates the uppercase effect in the
+ * "Example: uppercase this please" block. You can also demonstrate the effect
+ * of this hook by editing the title of an existing block or by creating a new
+ * block which where the default label has the string "uppercase" in it.
+ *
+ * Instead of hook_block_view_alter(), which is called for all blocks, you can
+ * also use hook_block_view_BASE_BLOCK_ID_alter() to alter a specific block. To
+ * only change the "example_uppercase" block we would use the function:
+ * hook_block_view_example_uppercase_alter().
+ */
+function nhttac_consultant_type_list_block_view_alter(array &$build, BlockPluginInterface $block) {
+  // We'll search for the string 'uppercase'.
+  $definition = $block->getPluginDefinition();
+  if ((!empty($build['#configuration']['label']) && mb_strpos($build['#configuration']['label'], 'uppercase')) || (!empty($definition['subject']) && mb_strpos($definition['subject'], 'uppercase'))) {
+    // This will uppercase the block title.
+    $build['#configuration']['label'] = mb_strtoupper($build['#configuration']['label']);
+  }
+}
+
+/**
+ * @} End of "defgroup nhttac_consultant_type_list".
+ */

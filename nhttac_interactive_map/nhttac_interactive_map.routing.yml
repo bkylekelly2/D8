@@ -1,0 +1,7 @@
+nhttac_interactive_map.description:
+  path: '/nhttac/map'
+  defaults:
+    _controller: '\Drupal\nhttac_interactive_map\Controller\MapController::getMap'
+    _title: 'NHTTAC Map'
+  requirements:
+    _permission: 'access content'

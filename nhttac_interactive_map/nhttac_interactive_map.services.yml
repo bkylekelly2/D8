@@ -1,0 +1,4 @@
+services:
+  nhttac_interactive_map.map_service:
+    class: Drupal\nhttac_interactive_map\Service\MapService
+    arguments: []

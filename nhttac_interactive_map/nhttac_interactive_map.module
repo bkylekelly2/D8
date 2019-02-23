@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * Module file for nhttac_interactive_map.
+ */
+
+function objectToArray( $data ) {
+  $d = "";
+
+  if ( is_object( $data ) )
+
+    $d = get_object_vars( $data );
+
+  return $d;
+
+}
+
+

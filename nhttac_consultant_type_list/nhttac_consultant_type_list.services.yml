@@ -1,0 +1,4 @@
+services:
+  nhttac_consultant_type_list.consultant_service:
+    class: Drupal\nhttac_consultant_type_list\Service\ConsultantTypeListService
+    arguments: []
