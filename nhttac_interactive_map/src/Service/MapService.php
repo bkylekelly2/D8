@@ -39,7 +39,7 @@ class MapService {
 
 
   private function returnKey(){
-    $key = 'AIzaSyBT53QICkddsrAYEXUZfCXC4bTMcE8fy64';
+    $key = '';
     return $key;
   }
 
