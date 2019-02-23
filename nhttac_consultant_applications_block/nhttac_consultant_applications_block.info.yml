@@ -1,7 +1,6 @@
 name: NHTTAC Consultant Applications Block
 type: module
 description: NHTTAC Consultant Applications.
-package: Example modules
 # core: 8.x
 dependencies:
   - drupal:block
